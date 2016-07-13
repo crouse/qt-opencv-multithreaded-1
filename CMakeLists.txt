@@ -1,31 +1,20 @@
-cmake_minimum_required(VERSION 3.2.3)
+file(GLOB_RECURSE UI_FILES *.ui)
+file(GLOB_RECURSE SOURCE_FILES *.cpp)
+file(GLOB_RECURSE HEADER_FILES *.h)
 
-project(qt-opencv-multithreaded)
+qt5_wrap_ui(UI_HEADERS ${UI_FILES})
 
-set(PROJECT_NAME            "qt-opencv-multithreaded")
-set(PROJECT_VERSION         "1.4.0")
-set(PROJECT_AUTHOR_NAME     "Nick D'Ademo")
-set(PROJECT_AUTHOR_EMAIL    "nickdademo@gmail.com")
-set(PROJECT_AUTHOR_WEBSITE  "www.nickdademo.com")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.h.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/Config.h
+)
 
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-# Instruct CMake to run moc automatically when needed.
-set(CMAKE_AUTOMOC ON)
+add_executable(${CMAKE_PROJECT_NAME}
+  ${UI_HEADERS}
+  ${SOURCE_FILES}
+  ${HEADER_FILES}
+)
 
-########
-# Qt 5 #
-########
-find_package(Qt5Widgets REQUIRED)
-
-##########
-# OpenCV #
-##########
-set(OpenCV_STATIC OFF)
-find_package(OpenCV REQUIRED)
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-###############
-# Application #
-###############
-add_subdirectory(src)
+target_link_libraries(${CMAKE_PROJECT_NAME}
+  Qt5::Widgets
+  ${OpenCV_LIBS}
+)

@@ -38,6 +38,8 @@
 #include "CameraConnectDialog.h"
 #include "Config.h"
 
+#define APP_NAME "insight"
+#define APP_AUTHOR_NAME "insight"
 #include <QLabel>
 #include <QMessageBox>
 #include <QPushButton>
@@ -241,7 +243,7 @@ void MainWindow::disconnectCamera(int index)
 
 void MainWindow::showAboutDialog()
 {
-    QMessageBox::information(this, tr("About"), QString("%1 v%2\n\nCreated by %3\nEmail: %4\nWebsite: %5").arg(APP_NAME).arg(APP_VERSION).arg(APP_AUTHOR_NAME).arg(APP_AUTHOR_EMAIL).arg(APP_AUTHOR_WEBSITE));
+    //QMessageBox::information(this, tr("About"), QString("%1 v%2\n\nCreated by %3\nEmail: %4\nWebsite: %5").arg(APP_NAME).arg(APP_VERSION).arg(APP_AUTHOR_NAME).arg(APP_AUTHOR_EMAIL).arg(APP_AUTHOR_WEBSITE));
 }
 
 bool MainWindow::removeFromMapByTabIndex(QMap<int, int> &map, int tabIndex)
